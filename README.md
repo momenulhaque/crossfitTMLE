@@ -44,3 +44,5 @@ DC_tmle
 1 -0.125 0.0188   -0.162  -0.0884
 
 ```
+# References
+Zivich PN, and Breskin A. "Machine learning for causal inference: on the use of cross-fit estimators." Epidemiology 32.3 (2021): 393-401
