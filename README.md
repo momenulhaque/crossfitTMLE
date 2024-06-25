@@ -21,7 +21,6 @@ require(SuperLearner)
 We generated a data set using Kang at al. (2007).
 
 ```{r}
-library(tmle)
 library(SuperLearner)
 library(tidyverse)
 gen.data <- function(n, do.pop=F, do.misp=F, my.transform=F){
