@@ -92,7 +92,7 @@ ObsData = gen.data(n=1200, do.pop=F, do.misp=T, my.transform=T)
 ## Apply the crossfitTMLE function
  
 ```{r}
-fit = crossfitTMLE(data=ObsData_FF,
+fit = crossfitTMLE(data=ObsData,
                           exposure="X",
                           outcome="Y",
                           covarsT=c("C1", "C2", "C3", "C4"),
