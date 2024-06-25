@@ -109,8 +109,11 @@ fit = crossfitTMLE(data=ObsData_FF,
                           conf.level=0.96,
                           stat = "median")
 
-fit
+> fit
 # A tibble: 1 × 4
+    ATE    se lower.ci upper.ci
+  <dbl> <dbl>    <dbl>    <dbl>
+1  6.23 0.369     5.47     6.99
 
 
 ```
