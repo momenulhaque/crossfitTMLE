@@ -114,9 +114,8 @@ fit = crossfitTMLE(data=ObsData_FF,
     ATE    se lower.ci upper.ci
   <dbl> <dbl>    <dbl>    <dbl>
 1  6.23 0.369     5.47     6.99
-
-
 ```
+
 # References
 Kang, J. D. Y., & Schafer, J. L. (2007). Demystifying Double Robustness: A Comparison of Alternative Strategies for Estimating a Population Mean from Incomplete Data. Statistical Science, 22(4). https://doi.org/10.1214/07-STS227
 
