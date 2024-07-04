@@ -17,60 +17,12 @@ The package primarily requires 'SuperLearner'. Additionally, it requires all the
 require(SuperLearner)
 # require(randomForest) for SL.randoForest.
 ```
-## Generating Data set 
-We generated a data set using Kang at al. (2007).
+## Example data set 
+We generated an example data set ("ObsData") using Kang at al. (2007) and attached it to the package.
 
 ```{r}
 library(SuperLearner)
 library(tidyverse)
-gen.data <- function(n, do.pop=F, do.misp=F, my.transform=F){
-  
-  C1 <- rnorm(n,0,1)
-  C2 <- rnorm(n,0,1)
-  C3 <- rnorm(n,0,1)
-  C4 <- rnorm(n,0,1)
-  
-  pscore <- plogis(-1 +log(1.75)*(C1+C2+C3+C4) )
-  X <- rbinom(n, 1, pscore)
-  
-  eps <- rnorm(n,0,6)
-  get.Y <- function(C1,C2,C3,C4,X,eps){
-    120+6*X+3*(C1+C2+C3+C4)+eps
-  }
-  Y1 <- get.Y(C1,C2,C3,C4,X=1,eps)
-  Y0 <- get.Y(C1,C2,C3,C4,X=0,eps)
-  Y <- get.Y(C1,C2,C3,C4,X,eps)
-  
-  if(do.pop){
-    # return the pscore & counterfactual outcomes
-    yay <- data.frame(cbind(pscore, Y1,Y0))
-  } else {
-    
-    if(do.misp & my.transform){
-      # BALZER & WESTLING transformation of the confounders
-      C1 <- exp(C1/2)
-      C2 <- C2/(1+exp(C1)) + 10
-      C3 <- (C1*C3/25 + 0.6)^3
-      C4 <- (C2 + C4 + 20)^2
-      
-    } else if (do.misp & !my.transform){
-      # NAIMI et al. transformation of the confounders
-      Z1 <- C1
-      Z2 <- C2
-      Z3 <- C3
-      Z4 <- C4
-      
-      C1 <- exp(Z1/2)
-      C2 <- Z2/(1+exp(Z1)) + 10
-      C3 <- (Z1*Z3/25 + 0.6)^3
-      C4 <- (Z2 + Z4 + 20)^2
-    }
-    # return observed data
-    yay <- data.frame(cbind(C1,C2,C3,C4,X,Y))
-    
-  }
-  yay
-}
 
 ## Defining Learners
 SL.randomForest.dcTMLE <- function(...){
@@ -83,9 +35,6 @@ SL.gam4.dcTMLE <- function(...){
   SL.gam(..., deg.gam=4)}
 SL.mean.dcTMLE <- function(...){
   SL.mean(...)}
-
-set.seed(236)
-ObsData = gen.data(n=1200, do.pop=F, do.misp=T, my.transform=T)
 ```
  
 ## Apply the crossfitTMLE function
